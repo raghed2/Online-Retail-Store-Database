@@ -64,3 +64,20 @@ INSERT INTO Orders VALUES (4, 3, 4, 1, DATE '2026-11-10');
 INSERT INTO Orders VALUES (5, 4, 5, 2, DATE '2026-11-12');
 INSERT INTO Orders VALUES (6, 5, 3, 1, DATE '2026-11-13');
 SELECT * FROM Orders;
+
+-- shoping cart TABLE
+
+CREATE TABLE Shopping_Cart (
+    cart_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_id INT NOT NULL UNIQUE,
+    created_at DATE DEFAULT SYSDATE NOT NULL,
+    CONSTRAINT fk_cart_customer FOREIGN KEY (customer_id)
+        REFERENCES Customers(customer_id) ON DELETE CASCADE
+);
+-- بيانات sopping cart
+INSERT INTO Shopping_Cart (customer_id) VALUES (1);
+INSERT INTO Shopping_Cart (customer_id) VALUES (2);
+INSERT INTO Shopping_Cart (customer_id) VALUES (3);
+INSERT INTO Shopping_Cart (customer_id) VALUES (4);
+INSERT INTO Shopping_Cart (customer_id) VALUES (5);
+
