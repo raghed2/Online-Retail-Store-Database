@@ -390,3 +390,41 @@ LEFT JOIN Products p ON c.category_id = p.category_id
 GROUP BY c.category_id, c.category_name;
 
 
+--role 1
+CREATE ROLE ShippingManager;
+-- grant privileges to shippingManager
+GRANT SELECT, INSERT, UPDATE ON Shipments TO ShippingManager;
+GRANT SELECT ON Orders TO ShippingManager;
+--check
+SELECT *
+FROM ROLE_TAB_PRIVS
+WHERE ROLE = 'SHIPPINGMANAGER';
+
+--role 2
+CREATE ROLE DataEntry;
+-- grant privileges to dataentry
+GRANT SELECT, INSERT, UPDATE, DELETE ON Customers TO DataEntry;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Categories TO DataEntry;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Products TO DataEntry;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Orders TO DataEntry;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Shipments TO DataEntry;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Shopping_Cart TO DataEntry;
+-- Check role
+SELECT *
+FROM ROLE_TAB_PRIVS
+WHERE ROLE = 'DATAENTRY';
+
+
+-- role 3
+CREATE ROLE CustomerRole;
+-- grant privileges to CustomerRole
+GRANT SELECT ON Products TO CustomerRole;
+GRANT SELECT ON Categories TO CustomerRole;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Shopping_Cart TO CustomerRole;
+GRANT SELECT, INSERT ON Orders TO CustomerRole;
+GRANT SELECT ON Shipments TO CustomerRole;
+-- Check role
+SELECT *
+FROM ROLE_TAB_PRIVS
+WHERE ROLE = 'CUSTOMERROLE';
+
